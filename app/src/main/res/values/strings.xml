@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Aisle</string>
+    <string name="get_otp_text">Get OTP</string>
+    <string name="enter_phone_text">Enter Your   \nPhone Number</string>
+    <string name="continue_text">Continue</string>
+    <string name="testing_phone">9876543212</string>
+    <string name="india_prefix">+91</string>
+    <string name="enter_otp_text">Enter The \nOTP</string>
+    <string name="dummy_phone_number">+91 987654321</string>
+    <string name="resend_otp">Resend OTP</string>
+    <string name="dummy_otp">1234</string>
+    <string name="upgrade_tx">Upgrade</string>
+</resources>
