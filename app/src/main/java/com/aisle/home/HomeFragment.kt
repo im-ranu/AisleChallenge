@@ -38,6 +38,7 @@ class HomeFragment : Fragment() {
     lateinit var compositeDisposable: CompositeDisposable
     lateinit var apiInterface: ApiInterface
     var retrofit: Retrofit? = null
+    var userResponse : UserResponse? = null
 
 
 
@@ -81,10 +82,14 @@ class HomeFragment : Fragment() {
                             Log.e(TAG,"imgUrl = ${imgUrl}")
                             val username = t.invites.profileItem[0].generalInformation.firstName+
                                     ", "+ t.invites.profileItem[0].generalInformation.age
+
                             Picasso.get().load(imgUrl)
                                 .into(iv_user_image_home)
 
                             tx_user_full_name.setText(username)
+                            tx_user_full_name.visibility = View.VISIBLE
+                            tx_tap_review_notes.visibility = View.VISIBLE
+                            userResponse = t
                         }
                     }
 

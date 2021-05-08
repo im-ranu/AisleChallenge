@@ -1,6 +1,7 @@
 package com.aisle
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.aisle.home.HomeFragment
@@ -14,20 +15,16 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
 
 
     val TAG = MainActivity::class.java.simpleName
-    lateinit var savedInstanceState : Bundle
+     var savedInstance : Bundle? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
 
-            if (savedInstanceState != null) {
-                this.savedInstanceState = savedInstanceState
-            }
+        this.savedInstance = savedInstanceState
 
-
-
-        initialization(savedInstanceState)
+        initialization(savedInstance)
     }
 
     private fun initialization(savedInstanceState: Bundle?) {
@@ -51,16 +48,26 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
 
     override fun onClick(v: View?) {
 
+        val fragment = supportFragmentManager.findFragmentByTag(Constants.HOME_FRAGMENT) as HomeFragment
+
         when(v?.id){
+
             R.id.discoverLL->{
                     // 2
+
+                Log.e(TAG,fragment.toString())
+
+                if (!fragment.isVisible && fragment!=null) {
+                    Log.e(TAG, "true" + fragment.toString())
                     supportFragmentManager
-                        // 3
-                        .beginTransaction()
-                        // 4
-                        .replace(R.id.container, HomeFragment.newInstance(), Constants.HOME_FRAGMENT)
-                        // 5
-                        .commit()
+                            // 3
+                            .beginTransaction()
+                            // 4
+                            .replace(R.id.container, HomeFragment.newInstance(), Constants.HOME_FRAGMENT)
+                            .addToBackStack(Constants.HOME_FRAGMENT)
+                            // 5
+                            .commit()
+                }
 
             }
             R.id.notesLL->{
@@ -70,8 +77,9 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
                     // 3
                     .beginTransaction()
                     // 4
-                    .replace(R.id.container, NotesFragment.newInstance(), Constants.PROFILE_FRAGMENT)
+                    .replace(R.id.container, NotesFragment.newInstance(), Constants.NOTES_FRAGMENT)
                     // 5
+                        .addToBackStack(Constants.NOTES_FRAGMENT)
                     .commit()
 
             }
@@ -82,8 +90,9 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
                     // 3
                     .beginTransaction()
                     // 4
-                    .replace(R.id.container, MatchesFragment.newInstance(), Constants.PROFILE_FRAGMENT)
+                    .replace(R.id.container, MatchesFragment.newInstance(), Constants.MATCHES_FRAGMENT)
                     // 5
+                        .addToBackStack(Constants.MATCHES_FRAGMENT)
                     .commit()
 
             }
@@ -96,6 +105,7 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
                         // 4
                         .replace(R.id.container, ProfileFragment.newInstance(), Constants.PROFILE_FRAGMENT)
                         // 5
+                            .addToBackStack(Constants.PROFILE_FRAGMENT)
                         .commit()
 
             }
