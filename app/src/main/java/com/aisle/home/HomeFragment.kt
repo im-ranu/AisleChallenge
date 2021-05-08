@@ -63,6 +63,11 @@ class HomeFragment : Fragment() {
 
         initializationViews(view)
         setSuggestedUserAdapter()
+
+        pullToRefresh.setOnRefreshListener {
+            loadData()
+            pullToRefresh.isRefreshing = false
+        }
         loadData()
 
     }
@@ -112,6 +117,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun initializationViews(view: View) {
+
 
         retrofit = ApiClient.getClient(context!!)
         if (retrofit!=null){
